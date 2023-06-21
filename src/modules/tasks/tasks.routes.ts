@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { registerTaskHandler } from './tasks.controller';
+import { createTaskHandler } from './tasks.controller';
 export async function tasksRoutes(server: FastifyInstance){
-    server.post('/', registerTaskHandler)
+    server.post('/', createTaskHandler)
 }

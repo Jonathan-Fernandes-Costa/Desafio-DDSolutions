@@ -2,6 +2,7 @@ import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import { tasksRoutes } from "./modules/tasks/tasks.routes";
 import { userRoutes } from "./modules/user/user.routes";
 import { userSchemas } from "./modules/user/user.schema";
+import { tasksSchemas } from "./modules/tasks/tasks.schema";
 import fjwt from "@fastify/jwt"
 
 
@@ -28,7 +29,7 @@ server.get('/teste', async function(){
 })
 
 async function main() {
-    for(const schema of userSchemas){
+    for(const schema of [...userSchemas, ...tasksSchemas]){
         server.addSchema(schema);
     }
 
