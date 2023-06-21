@@ -14,8 +14,20 @@ enum Status{
   pending
 }
 model Task{
-  id String @id @default(uuid())
-  name String 
+  id Int @id @default(autoincrement())
+  title String 
+  describe String?
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  creator User @relation(fields: [creatorId], references: [id])
+  creatorId String
   status Status @default(pending)
+}
+model User{
+  id String @id @default(uuid())
+  email String @unique
+  name String?
+  password String
+  salt String
+  Tasks Task[]
 }
