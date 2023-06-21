@@ -5,7 +5,6 @@ import { userSchemas } from "./modules/user/user.schema";
 import { tasksSchemas } from "./modules/tasks/tasks.schema";
 import fjwt from "@fastify/jwt"
 
-
 export const server = fastify()
 //Modulos
 
@@ -47,8 +46,9 @@ server.get('/teste', async function(){
 async function main() {
     for(const schema of [...userSchemas, ...tasksSchemas]){
         server.addSchema(schema);
-    }
 
+    }
+    
     server.register(userRoutes, {
         prefix: "api/users"
     })
