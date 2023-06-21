@@ -7,16 +7,29 @@ import fjwt from "@fastify/jwt"
 
 
 export const server = fastify()
+//Modulos
 
 declare module "fastify"{
     export interface FastifyInstance{
         authenticate: any
     }
 }
+declare module "@fastify/jwt"{
+    interface FastifyJWT{
+        user:{
+            id: number;
+            name:string;
+            email:string;
+        };
+    }
+}
+
+
+//fjwt
 server.register(fjwt, {
     secret: "iokdjadjpoijaplsjdapojdpaj123141akdkajmd1",
 });
-
+//authenticate
 server.decorate("authenticate", async(request:FastifyRequest, reply:FastifyReply)=>{
     try{
         await request.jwtVerify()
@@ -24,10 +37,13 @@ server.decorate("authenticate", async(request:FastifyRequest, reply:FastifyReply
         return reply.send(e)
     }
 })
+
+//server teste
 server.get('/teste', async function(){
     return {status: "Ok"}
 })
 
+//main
 async function main() {
     for(const schema of [...userSchemas, ...tasksSchemas]){
         server.addSchema(schema);
