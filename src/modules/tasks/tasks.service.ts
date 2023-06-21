@@ -1,7 +1,7 @@
 import prisma from "../../utils/prisma"
 import {CreateTaskInput} from "./tasks.schema"
 
-export async function createTask(data: CreateTaskInput & {ownerId: number}){
+export async function createTask(data: CreateTaskInput & {creatorId: string}){
     return prisma.task.create({
         data,
     })
@@ -12,6 +12,8 @@ export function getTasks(){
             describe: true,
             title: true,
             id: true,
+            createdAt: true,
+            updatedAt: true,
             status: true,
             creator:{
                 select:{
@@ -20,6 +22,25 @@ export function getTasks(){
                 }
             }
             
+        }
+    })
+}
+export async function deleteTask(id:number){
+    return prisma.task.delete({
+        where:{
+            id: id,
+        }
+    })
+}
+
+export async function updateTask(id:number, data:CreateTaskInput){
+    return prisma.task.update({
+        where:{
+            id: id,
+        },
+        data:{
+            title: data.title,
+            describe: data.describe
         }
     })
 }

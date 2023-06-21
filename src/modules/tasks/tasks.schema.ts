@@ -5,7 +5,6 @@ import {buildJsonSchemas} from "fastify-zod"
 const taskInput = {
     title: z.string(),
     describe: z.string().optional(),
-    creatorId: z.string()
 }
 const taskGenerated = {
     id: z.number(),
@@ -23,10 +22,17 @@ const tasksResponseSchema = z.array(taskResponseSchema);
 
 export type CreateTaskInput = z.infer<typeof createTaskSchema>
 
+const deleteTaskSchema = z.object({
+    id: z.string()
+})
+export type DeletePutTaskInput = z.infer<typeof deleteTaskSchema>
 export const {schemas: tasksSchemas, $ref} = buildJsonSchemas({
     createTaskSchema,
     taskResponseSchema,
     tasksResponseSchema,
+},
+{
+    $id:"TaskSchema"
 })
 /*  id Int @id @default(autoincrement())
   title String 
