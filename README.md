@@ -17,3 +17,11 @@ Desafio de Estágio em Backend com Node.js: Desenvolvimento de API RESTful de Ge
 - `./src/modules`: É onde está sendo feita a configurações das rotas, schemas, controllers e serviços das tarefas e dos usuários.
 - `./prisma`: É onde está localizado a configuração do schema do prisma e sua migração.
 - `./utils`: Possui o arquivo básico do prisma e o sistema de hash.
+
+### Tecnologias utilizadas
+
+- Node.js and TypesScript
+- Prisma ORM
+- Zod
+- Fastify
+- JWT
